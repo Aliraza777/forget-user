@@ -108,11 +108,11 @@ function redactor(subject: Subject): (s: string) => string {
       ]),
     ),
   ].sort((a, b) => b.length - a.length);
-  const pattern = new RegExp(forms.map(escape).join("|"), "gi");
+  const pattern = new RegExp(forms.map(escapeRegExp).join("|"), "gi");
   return (s) => s.replace(pattern, "[subject]");
 }
 
-const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 function digest(value: string, key: string | undefined): string {
   return key
