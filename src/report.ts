@@ -74,9 +74,9 @@ export function renderResult(subject: Subject, executed: Executed[], receiptPath
     for (const o of e.outcomes) {
       const check =
         o.verified === true
-          ? pc.dim(" (checked: gone)")
+          ? pc.dim(" · checked: gone")
           : o.verified === false
-            ? pc.red(" (still found afterwards)")
+            ? pc.red(" · still found afterwards")
             : "";
       out.push(`    ${STATUS[o.status]}  ${o.label}${check}`);
       const detail = o.error ?? o.reason ?? o.note;

@@ -74,6 +74,26 @@ If any service can't be checked (wrong key, outage), `delete --confirm` stops be
 
 Exit codes: `0` success, `1` something failed or was still found afterwards, `2` usage or setup error.
 
+## Use it from your app
+
+The same logic is a library, for a "delete my account" button or a queued erasure job:
+
+```ts
+import { forgetUser } from "forget-user";
+
+// Services are read from the same environment variables as the CLI.
+const result = await forgetUser({ email: user.email, userId: user.id }, { confirm: true });
+
+if (!result.done) {
+  // "service-error": a service couldn't be checked, so nothing was changed. Retry later.
+  throw new Error(`forget-user did not run: ${result.reason}`);
+}
+await db.erasureReceipts.insert({ userId: user.id, receipt: result.receipt });
+if (!result.ok) alertOps("Some records could not be deleted", result.executed);
+```
+
+Without `confirm: true` it returns the plan and changes nothing. You can also pass adapters yourself (`stripe(key, { charged: "scrub" })`, `posthog(key, { projectId, host })`, `clerk(key)`, `resend(key)`, `loops(key)`) instead of using environment variables. Types are included.
+
 ## Receipts
 
 `delete --confirm` writes `forget-user-receipt-<time>.json` (or `--receipt <path>`). It records each service, record id, action, status and the reason for anything kept. It names the user only by a hash of their email and user id, and removes them from any vendor error messages it quotes.
