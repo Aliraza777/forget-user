@@ -86,7 +86,7 @@ FORGET_USER_RECEIPT_KEY=… npx forget-user verify-receipt receipt.json --email 
 
 ## Status
 
-Version 0.1. Every request the adapters send (paths, methods, query parameters, body fields, and Stripe's `""` for clearing fields) was checked in October 2026 against each vendor's published OpenAPI spec and official SDK. The test suite checks the requests and the handling of responses against a fake HTTP layer. The adapters have not yet been run against live test-mode accounts, so try `discover` and a dry run on a test account before relying on it.
+Version 0.1. Every request the adapters send (paths, methods, query parameters, body fields, and Stripe's `""` for clearing fields) was checked in October 2026 against each vendor's published OpenAPI spec and official SDK. The test suite checks the requests and the handling of responses against a fake HTTP layer. The Stripe adapter is also tested end to end against a real Stripe account in test mode (`npm run test:live`): finding both email spellings, the dry run, deleting, cancelling a subscription, retaining a charged customer, scrubbing, and leaving other customers alone. The PostHog, Clerk, Resend and Loops adapters have not yet been run against live accounts, so try `discover` and a dry run on a test account before relying on them.
 
 This is a tool, not legal advice: what you must delete or keep depends on your jurisdiction and contracts.
 
