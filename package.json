@@ -1,0 +1,58 @@
+{
+  "name": "forget-user",
+  "version": "0.1.0",
+  "description": "Delete one user from every service your app uses (Stripe, PostHog, Clerk, Resend, Loops) for GDPR/CCPA erasure requests: dry run first, legal retention rules, and a receipt you can keep as proof.",
+  "homepage": "https://github.com/Aliraza777/forget-user#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aliraza777/forget-user.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Aliraza777/forget-user/issues"
+  },
+  "type": "module",
+  "bin": {
+    "forget-user": "dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsx src/cli.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome check --write ."
+  },
+  "keywords": [
+    "gdpr",
+    "ccpa",
+    "privacy",
+    "right-to-be-forgotten",
+    "erasure",
+    "dsar",
+    "account-deletion",
+    "stripe",
+    "posthog",
+    "clerk",
+    "cli"
+  ],
+  "author": "aliwahlah <aliwahlah777@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "15.0.0",
+    "picocolors": "1.1.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@types/node": "25.9.9",
+    "tsup": "8.5.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "5.0.3"
+  }
+}
